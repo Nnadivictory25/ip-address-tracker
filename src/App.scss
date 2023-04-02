@@ -1,2 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+body {
+    overflow: hidden;
+}
 
+main {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: top center;
+    min-height: 100vh;
+
+    button {
+        transition: all .2s ease-in-out !important;
+    }
+
+    .leaflet-container {
+        height: 100% !important;
+        width: 100% !important;
+    }
+}
