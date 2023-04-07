@@ -5,37 +5,37 @@ import { LatLngExpression, LatLngTuple } from 'leaflet';
 
 interface IpDataFetch {
 	ip: string;
-	location: {
-		country: string;
-		region: string;
-		city: string;
-		lat: number;
-		lng: number;
-		postalCode: string;
-		timezone: string;
-		geonameId: number;
-	};
-	as: {
-		asn: number;
+	city: string;
+	region: string;
+	region_code: string;
+	country_name: string;
+	country_code: string;
+	latitude: number;
+	longitude: number;
+	postal: string | null;
+	asn: {
+		asn: string;
 		name: string;
-		route: string;
-		domain: string;
-		type: string;
+		domain: string | null;
 	};
-	isp: string;
+	time_zone: {
+		name: string;
+		abbr: string;
+		offset: string;
+	}
 }
 
 const useIpData = (ipQuery: IpQuery) => {
-	const [data, setData] = useState({});
+	const [data, setData] = useState<IpDataFetch>({} as IpDataFetch);
 	const [isLoading, setIsLoading] = useState(true);
-    const [center, setCenter] = useState<LatLngTuple>();
+	const [center, setCenter] = useState<LatLngTuple>();
 
 	useEffect(() => {
 		const controller = new AbortController();
 
 		axios
 			.get<IpDataFetch>(
-				'https://geo.ipify.org/api/v2/country,city?apiKey=at_ugsGupIKCK7iFCa1MXoX9C33AoW6w',
+				'https://api.ipdata.co?api-key=5487fe827551d1c9bfba54537f7d2b3a3b93ae4c1fa946dea43a417b',
 				{
 					signal: controller.signal,
 					params: {
@@ -48,7 +48,7 @@ const useIpData = (ipQuery: IpQuery) => {
 				const { data } = res;
 				setData(data);
 				setIsLoading(false);
-				setCenter([data.location.lat, data.location.lng]);
+				setCenter([data.latitude, data.longitude]);
 				console.log(data);
 			})
 			.catch((err) => {

@@ -27,7 +27,7 @@ function App() {
 			}}>
 			<h1 className='text-white text-center'>IP Address Tracker</h1>
 			<SearchInput />
-			<IpInfo />
+			<IpInfo ipQuery={ipQuery} />
 			<MapElement ipQuery={ipQuery} />
 		</main>
 	);

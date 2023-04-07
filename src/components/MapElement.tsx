@@ -2,13 +2,12 @@ import { MapContainer, TileLayer, useMap, Marker } from 'react-leaflet';
 import { IpQuery } from '../App';
 import useIpData from '../hooks/useIpData';
 
-interface Props {
+export interface IpQueryProp {
 	ipQuery: IpQuery;
 }
 
-const Map = ({ ipQuery }: Props) => {
-	const { data, center, isLoading } = useIpData(ipQuery);
-	console.log(center);
+const Map = ({ ipQuery }: IpQueryProp) => {
+	const { center } = useIpData(ipQuery);
 
 	return (
 		<div className='h-[60%] w-full absolute bottom-0 z-0'>
