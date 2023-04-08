@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { IpQuery } from '../App';
-import { LatLngExpression, LatLngTuple } from 'leaflet';
+import {  LatLngTuple } from 'leaflet';
 
 interface IpDataFetch {
 	ip: string;
@@ -29,17 +29,18 @@ const useIpData = (ipQuery: IpQuery) => {
 	const [data, setData] = useState<IpDataFetch>({} as IpDataFetch);
 	const [isLoading, setIsLoading] = useState(true);
 	const [center, setCenter] = useState<LatLngTuple>();
+	const [error, setError] = useState(false);
 
 	useEffect(() => {
 		const controller = new AbortController();
 
 		axios
 			.get<IpDataFetch>(
-				'https://api.ipdata.co?api-key=5487fe827551d1c9bfba54537f7d2b3a3b93ae4c1fa946dea43a417b',
+				`https://api.ipdata.co/${ipQuery.ip || ''}?api-key=5487fe827551d1c9bfba54537f7d2b3a3b93ae4c1fa946dea43a417b`,
 				{
 					signal: controller.signal,
 					params: {
-						ipAddress: ipQuery?.ipAddress,
+						ip: ipQuery?.ip,
 						domain: ipQuery?.domain,
 					},
 				}
@@ -49,7 +50,6 @@ const useIpData = (ipQuery: IpQuery) => {
 				setData(data);
 				setIsLoading(false);
 				setCenter([data.latitude, data.longitude]);
-				console.log(data);
 			})
 			.catch((err) => {
 				if (err.message !== 'canceled') {

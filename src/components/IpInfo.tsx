@@ -18,7 +18,7 @@ const IpInfo = ({ipQuery}: IpQueryProp) => {
             </div>
             <div className="location relative lg:w-[23%] flex-wrap">
                 <p className="text-darkGrey text-xs font-semibold">LOCATION</p>
-                <p className="font-medium text-lg lg:text-xl">{location}</p>
+                <p className="font-medium text-lg lg:text-xl">{location || ''}</p>
                 {isWideScreen && <div className="absolute bg-darkGrey rounded-full w-[2px] h-[50px] inset-y-0 right-2 opacity-70"></div>}
             </div>
             <div className="timezone relative lg:w-[23%] flex-wrap">
