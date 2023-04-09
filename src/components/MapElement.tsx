@@ -1,7 +1,10 @@
 import { MapContainer, TileLayer, useMap, Marker } from 'react-leaflet';
+import L from 'leaflet';
 import { IpQuery } from '../App';
 import useIpData from '../hooks/useIpData';
 import { useEffect } from 'react';
+
+import marker from '../assets/icon-location.svg'
 
 export interface IpQueryProp {
 	ipQuery: IpQuery;
@@ -11,6 +14,13 @@ interface LatLng {
 	lat: number;
 	lng: number;
 }
+
+const myIcon = new L.Icon({
+    iconUrl: marker,
+    iconRetinaUrl: marker,
+    popupAnchor:  [-0, -0],
+    iconSize: [32,45],     
+})
 
 const Map = ({ ipQuery }: IpQueryProp) => {
 	const { center } = useIpData(ipQuery);
@@ -32,7 +42,7 @@ const Map = ({ ipQuery }: IpQueryProp) => {
 					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 					url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 				/>
-				<Marker position={center}></Marker>
+				<Marker position={center} icon={myIcon}></Marker>
 				<RecenterAutomatically lat={center[0]} lng={center[1]} />
 			</MapContainer>
 		</div>
