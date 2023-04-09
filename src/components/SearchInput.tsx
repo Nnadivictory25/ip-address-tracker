@@ -25,6 +25,7 @@ const SearchInput = ({ onSubmit }: Props) => {
 	const handleSearch = (data: FieldValues) => {
         // console.log(data.ip);
         onSubmit(data.ip)
+        reset()
     };
     
 	return (
