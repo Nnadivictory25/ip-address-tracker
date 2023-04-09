@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useWindowWide from './hooks/useWindowWidth';
 import bgImgMobile from './assets/pattern-bg-mobile.png';
 import bgImgDesktop from './assets/pattern-bg-desktop.png';
@@ -18,7 +18,7 @@ function App() {
 	const isWideScreen = useWindowWide(650);
 	const [ipQuery, setIpQuery] = useState<IpQuery>({} as IpQuery);
 
-	const handleSearch = (ip: string | undefined) => {
+	const handleSearch = (ip: string) => {
 		setIpQuery({ ...ipQuery, ip: ip });
 	};
 
